@@ -1,0 +1,15 @@
+.outer-width {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.inner-width {
+  @media (min-width: 120ch) {
+    max-width: 110ch;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 119.9ch) {
+    margin: 0 2ch;
+  }
+}

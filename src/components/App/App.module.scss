@@ -1,0 +1,23 @@
+@import "styles/breakpoints";
+@import "styles/color";
+@import "styles/fonts";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.page {
+  @extend .font--body;
+  @extend .outer-width;
+
+  background-color: map-get($space, "night-sky");
+  color: map-get($space, "starlight");
+  min-height: 100vh;
+  padding: 0;
+}
+
+.main {
+  @extend .inner-width;
+}

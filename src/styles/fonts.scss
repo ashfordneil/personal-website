@@ -1,0 +1,27 @@
+// This is where all of the fonts used in the site are defined. No using fonts
+// not from this file.
+
+// This is the main font we do everything in. Try to avoid touching this
+// directly.
+$font: Helvetica Neue, Helvetica, Arial, sans-serif;
+
+// Utility classes to be extended. These will define all of the typography
+// properties needed.
+
+.font {
+  font-family: $font;
+  margin: 0;
+
+  &--body {
+    @extend .font;
+    font-weight: 300;
+    line-height: 1.06;
+    padding-top: 0.6em;
+  }
+
+  &--heading {
+    @extend .font;
+    font-weight: 500;
+    padding-top: 1em;
+  }
+}
