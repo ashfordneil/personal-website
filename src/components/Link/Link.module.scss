@@ -1,0 +1,24 @@
+@import "styles/fonts";
+@import "styles/color";
+
+.main {
+  display: flex;
+  align-items: baseline;
+
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+.inner {
+  @extend .font--body;
+  padding: 0;
+  margin-left: 1ch;
+
+  position: relative;
+  text-decoration: underline;
+}
+
+.main:visited {
+  color: map-get($space, "shooting-star");
+}
