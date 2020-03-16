@@ -1,5 +1,6 @@
-import React, { useState, useTransition, Suspense, useEffect } from "react";
-import { prefetch, refetch } from "react-suspense-fetch";
+import React, { useState, Suspense } from "react";
+import { useLocation } from "react-router";
+import { prefetch } from "react-suspense-fetch";
 
 import Search from "components/Search";
 import Spinner from "components/Spinner";
@@ -10,11 +11,19 @@ import { getStories } from "utility/stories";
 import css from "./Browser.module.scss";
 
 const Browser: React.FC = () => {
-  const [tags, setTags] = useState<string[]>([]);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search)
+    .getAll("search")
+    .map(str => str.trim());
+  const [tags, setTags] = useState<string[]>(params);
 
   return (
     <>
-      <Search placeholder="Search for anything..." setTags={setTags} />
+      <Search
+        placeholder="Search for anything..."
+        setTags={setTags}
+        tags={tags}
+      />
       <Suspense fallback={<Spinner big />}>
         <RenderResults tags={tags} />
       </Suspense>

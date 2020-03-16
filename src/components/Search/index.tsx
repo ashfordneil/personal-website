@@ -8,15 +8,11 @@ export interface Props {
   placeholder: string;
   initial?: string;
   setTags: (input: string[]) => void;
+  tags: string[];
 }
 
 const Search: React.FC<Props> = props => {
   // the tags we've currently got
-  const [tags, setTagsRaw] = useState<string[]>([]);
-  const setTags = (tags: string[]) => {
-    setTagsRaw(tags);
-    props.setTags(tags);
-  };
   // the tag we're writing
   const [text, setText] = useState("");
 
@@ -24,12 +20,12 @@ const Search: React.FC<Props> = props => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const prettied = text.trim();
-    if (tags.indexOf(prettied) !== -1) {
+    if (props.tags.indexOf(prettied) !== -1) {
       // we already have this tag
       return;
     }
 
-    setTags([...tags, prettied]);
+    props.setTags([...props.tags, prettied]);
     setText("");
   };
 
@@ -38,15 +34,17 @@ const Search: React.FC<Props> = props => {
     const { keyCode } = event;
     if (keyCode === 8 || keyCode === 46) {
       if (text === "") {
-        setTags(tags.filter((_tag, i) => i + 1 < tags.length));
+        props.setTags(
+          props.tags.filter((_tag, i) => i + 1 < props.tags.length)
+        );
       }
     }
   };
 
   return (
     <div className={css.main}>
-      {tags.map((tag, i) => (
-        <Tag key={i} body={tag} tags={tags} setTags={setTags} />
+      {props.tags.map((tag, i) => (
+        <Tag key={i} body={tag} tags={props.tags} setTags={props.setTags} />
       ))}
       <form className={css.form} onSubmit={onSubmit}>
         <input
