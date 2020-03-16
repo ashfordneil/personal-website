@@ -7,7 +7,8 @@
   display: grid;
   grid-template-areas: "name tag" "date tag";
   grid-template-columns: 60% 40%;
-  grid-template-rows: min-content;
+  grid-template-rows: 1em 1em;
+  grid-row-gap: 0.6rem;
   cursor: pointer;
 }
 
@@ -24,6 +25,7 @@
   .main {
     border-radius: 0.5rem;
     border-bottom: none;
+    padding-bottom: 0.5rem;
   }
   .main:hover {
     background-color: map-get($space, "twilight");
@@ -45,10 +47,40 @@
 }
 
 .tags {
+  margin: auto 0;
   grid-area: tag;
   display: grid;
+  perspective: 15rem;
 }
 
 .tag {
-  transform: rotateY(20deg);
+  transform: rotateX(var(--angle)) translateZ(1.5em);
+  transition: 0.3s ease transform, 0.3s ease color;
+  grid-column: 1;
+  grid-row: 1;
+  backface-visibility: hidden;
+
+  color: map-get($space, "shooting-star");
+
+  &0 {
+    --angle: 0;
+    color: map-get($space, "starlight");
+  }
+  &1 {
+    --angle: 45deg;
+  }
+  &Neg1 {
+    --angle: -45deg;
+  }
+  &2 {
+    --angle: 90deg;
+  }
+  &Neg2 {
+    --angle: -90deg;
+    transition: none;
+  }
+  &Hidden {
+    --angle: -180deg;
+    transition: none;
+  }
 }
