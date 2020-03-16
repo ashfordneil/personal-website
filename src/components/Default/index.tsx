@@ -1,16 +1,15 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useLocation } from "react-router";
 
 import Browser from "components/Browser";
 
 import css from "./Default.module.scss";
 
 const Default: React.FC = () => {
-  const history = useHistory();
-  const { pathname } = history.location;
+  const { pathname } = useLocation();
   const message =
     pathname === "/"
-      ? "Hi! My name is Neil, and welcome to my website."
+      ? "Hi! My name is Neil, and welcome to my website. Have a look around."
       : "We couldn't find that. Maybe you meant one of these?";
 
   return (

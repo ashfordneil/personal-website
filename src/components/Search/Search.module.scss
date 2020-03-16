@@ -25,9 +25,11 @@
 
 .form {
   margin: 0.5rem 0;
+  flex: 1;
 }
 
 .rawInput {
+  width: 100%;
   background: none;
   border: none;
   color: inherit;
