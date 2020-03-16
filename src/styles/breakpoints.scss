@@ -5,6 +5,7 @@
 
 .inner-width {
   @media (min-width: 120ch) {
+    width: 100%;
     max-width: 110ch;
     margin: 0 auto;
   }

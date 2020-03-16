@@ -14,10 +14,10 @@ const Default: React.FC = () => {
       : "We couldn't find that. Maybe you meant one of these?";
 
   return (
-    <div className={css.main}>
+    <>
       <h1 className={css.text}>{message}</h1>
       <Browser />
-    </div>
+    </>
   );
 };
 

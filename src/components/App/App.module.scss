@@ -14,11 +14,18 @@ body {
   @extend .outer-width;
 
   color: map-get($space, "starlight");
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: hidden;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .main {
   @extend .inner-width;
   padding-top: 1rem;
+  flex: 1;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 }

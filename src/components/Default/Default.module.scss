@@ -1,9 +1,5 @@
 @import "styles/fonts";
 
-.main {
-  margin: 0 auto;
-}
-
 .text {
   @extend .font--heading;
   max-width: 90ch;

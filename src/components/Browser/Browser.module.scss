@@ -1,14 +1,5 @@
 @import "styles/color";
 
-.main {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-
 .search {
   width: 100%;
   max-width: 60ch;
@@ -18,13 +9,24 @@
   border-radius: 0.5em;
   padding: 0.5rem 1ch;
   font-size: inherit;
+  align-self: center;
+
+  top: 0;
+  position: sticky;
+  z-index: 1;
+  border: 2px solid map-get($space, "opaque");
 
   &::placeholder {
     color: map-get($space, "shooting-star");
   }
+
+  &:active {
+    border-color: map-get($space, "twilight");
+  }
 }
 
 .results {
+  align-self: center;
   width: 100%;
   padding-top: 1rem;
   max-width: 60ch;

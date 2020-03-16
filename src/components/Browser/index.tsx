@@ -17,7 +17,7 @@ const Browser: React.FC = () => {
   };
 
   return (
-    <div className={css.main}>
+    <>
       <input
         placeholder="Search for an article"
         className={css.search}
@@ -27,7 +27,7 @@ const Browser: React.FC = () => {
       <Suspense fallback={<Spinner big />}>
         <RenderResults query={search} />
       </Suspense>
-    </div>
+    </>
   );
 };
 
