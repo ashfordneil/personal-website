@@ -1,0 +1,79 @@
+@import "styles/fonts";
+@import "styles/color";
+
+.main {
+  @extend .font--body;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 60ch;
+  background-color: map-get($space, "twilight");
+  color: map-get($space, "starlight");
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5rem 1ch;
+  font-size: inherit;
+  align-self: center;
+
+  top: 0;
+  position: sticky;
+  z-index: 1;
+  border: 2px solid map-get($space, "opaque");
+
+  display: flex;
+  align-items: baseline;
+}
+
+.form {
+  margin: 0.5rem 0;
+}
+
+.rawInput {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+
+  &::placeholder {
+    color: map-get($space, "shooting-star");
+  }
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+.tag {
+  border-radius: 0.5em;
+  padding: 0.5em 1ch;
+  background-color: map-get($space, "night-sky");
+  margin-right: 1ch;
+  cursor: pointer;
+
+  position: relative;
+}
+
+.closeTag {
+  font-size: 0.8rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  transform: translate(40%, -40%);
+  background-color: map-get($space, "shooting-star");
+  color: map-get($space, "opaque");
+  border-radius: 50%;
+  width: 1em !important;
+  text-align: center;
+}
+
+// make only the close button clickable
+@media (pointer: fine) {
+  .tag {
+    pointer-events: none;
+  }
+
+  .closeTag {
+    pointer-events: all;
+  }
+}

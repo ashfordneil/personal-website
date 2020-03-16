@@ -1,6 +1,7 @@
 import React, { useState, useTransition, Suspense, useEffect } from "react";
 import { prefetch, refetch } from "react-suspense-fetch";
 
+import Search from "components/Search";
 import Spinner from "components/Spinner";
 import StoryThumbnail from "components/StoryThumbnail";
 
@@ -9,23 +10,13 @@ import { getStories } from "utility/stories";
 import css from "./Browser.module.scss";
 
 const Browser: React.FC = () => {
-  const [search, setSearch] = useState("");
-
-  const update = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.stopPropagation();
-    setSearch(event.target.value);
-  };
+  const [tags, setTags] = useState<string[]>([]);
 
   return (
     <>
-      <input
-        placeholder="Search for an article"
-        className={css.search}
-        value={search}
-        onChange={update}
-      />
+      <Search placeholder="Search for anything..." setTags={setTags} />
       <Suspense fallback={<Spinner big />}>
-        <RenderResults query={search} />
+        <RenderResults tags={tags} />
       </Suspense>
     </>
   );
@@ -34,7 +25,7 @@ const Browser: React.FC = () => {
 const data = prefetch(getStories, {});
 
 interface Props {
-  query: string;
+  tags: string[];
 }
 
 const RenderResults: React.FC<Props> = props => {
@@ -42,12 +33,10 @@ const RenderResults: React.FC<Props> = props => {
     throw new Error("No stories found in the database");
   }
 
-  const queries = props.query.split(" ");
-
   const filtered = data.filter(item => {
     const searchable = [item.name, ...item.tags];
     let output = true;
-    for (let query of queries) {
+    for (let query of props.tags) {
       let tmp = false;
       for (let tag of searchable) {
         tmp = tmp || tag.toLowerCase().startsWith(query.toLowerCase());
