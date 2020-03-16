@@ -6,13 +6,13 @@ html,
 body {
   padding: 0;
   margin: 0;
+  background-color: map-get($space, "night-sky");
 }
 
 .page {
   @extend .font--body;
   @extend .outer-width;
 
-  background-color: map-get($space, "night-sky");
   color: map-get($space, "starlight");
   min-height: 100vh;
   padding: 0;
@@ -20,4 +20,5 @@ body {
 
 .main {
   @extend .inner-width;
+  padding-top: 1rem;
 }

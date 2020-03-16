@@ -17,7 +17,8 @@
     "@types/react-router": "^5.1.4",
     "react": "^0.0.0-experimental-8b155d261",
     "react-dom": "^0.0.0-experimental-8b155d261",
-    "react-router": "^5.1.2"
+    "react-router": "^5.1.2",
+    "react-suspense-fetch": "^0.2.1"
   },
   "browserslist": {
     "production": [

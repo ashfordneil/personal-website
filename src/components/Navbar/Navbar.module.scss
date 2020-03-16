@@ -9,6 +9,8 @@ $easing: 0.6s ease;
   padding-top: env(safe-area-inset-top);
   background-color: map-get($space, "opaque");
   color: map-get($space, "starlight");
+  top: 0;
+  position: sticky;
 }
 
 .main {

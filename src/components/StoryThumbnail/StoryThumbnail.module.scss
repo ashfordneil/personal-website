@@ -1,0 +1,54 @@
+@import "styles/color";
+@import "styles/fonts";
+
+.main {
+  padding: 0.5rem 2ch 1rem;
+  height: min-content;
+  display: grid;
+  grid-template-areas: "name tag" "date tag";
+  grid-template-columns: 60% 40%;
+  grid-template-rows: min-content;
+  cursor: pointer;
+}
+
+.main {
+  border-bottom: 2px solid map-get($space, "twilight");
+
+  &:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0.5rem;
+  }
+}
+
+@media (hover: hover) {
+  .main {
+    border-radius: 0.5rem;
+    border-bottom: none;
+  }
+  .main:hover {
+    background-color: map-get($space, "twilight");
+  }
+}
+
+.name {
+  grid-area: name;
+  @extend .font--heading;
+  padding: 0;
+}
+
+.date {
+  grid-area: date;
+  @extend .font--body;
+  padding: 0;
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.tags {
+  grid-area: tag;
+  display: grid;
+}
+
+.tag {
+  transform: rotateY(20deg);
+}
