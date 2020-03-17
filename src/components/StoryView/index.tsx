@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router";
 import { prefetch, refetch } from "react-suspense-fetch";
 
-import ErrorFallback from "components/ErrorFallback";
+import UnderConstruction from "components/UnderConstruction";
 
 import { getStory } from "utility/stories";
 
@@ -19,7 +19,7 @@ const StoryView: React.FC = () => {
     <>
       <h1 className={css.heading}>{data.name}</h1>
       <span className={css.date}>{data.updated.toLocaleDateString()}</span>
-      <ErrorFallback error={new Error("Under construction")} />
+      <UnderConstruction ticket={1} />
     </>
   );
 };

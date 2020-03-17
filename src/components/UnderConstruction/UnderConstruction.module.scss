@@ -12,7 +12,7 @@
 
 .heading {
   @extend .font--heading;
-  color: map-get($semantic, "error");
+  color: map-get($semantic, "warning");
 }
 
 .body {

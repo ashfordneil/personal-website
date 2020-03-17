@@ -20,6 +20,11 @@ $font: Helvetica Neue, Helvetica, Arial, sans-serif;
     padding-top: 0.6em;
   }
 
+  &--bold {
+    @extend .font--body;
+    font-weight: 500;
+  }
+
   &--heading {
     @extend .font;
     font-weight: 500;
