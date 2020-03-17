@@ -11,3 +11,8 @@ $space: (
   "night-sky": hsl($space--hue, 10%, 16%),
   "opaque": hsl($space--hue, 15%, 11%)
 );
+
+// The "semantic" colours. These are used to convey meaning.
+$semantic: (
+  "error": hsl(340, 67%, 50%)
+);

@@ -1,0 +1,26 @@
+@import "styles/color";
+@import "styles/fonts";
+
+.main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.heading {
+  @extend .font--heading;
+  color: map-get($semantic, "error");
+}
+
+.body {
+  @extend .font--body;
+  color: map-get($space, "starlight");
+}
+
+.generic {
+  @extend .font--body;
+  color: map-get($space, "shooting-star");
+}

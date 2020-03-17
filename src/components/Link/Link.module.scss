@@ -2,8 +2,8 @@
 @import "styles/color";
 
 .main {
-  display: flex;
-  align-items: center;
+  display: inline-flex;
+  align-items: baseline;
 
   cursor: pointer;
   color: inherit;
