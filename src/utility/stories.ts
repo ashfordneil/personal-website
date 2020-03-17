@@ -1,13 +1,42 @@
-import { Resource, listFilesRaw } from "utility/storage";
+import {
+  Resource,
+  listFilesRaw,
+  getFileMetadata,
+  getFile
+} from "utility/storage";
 
-export interface Story {
+export interface StoryMetadata {
   etag: string;
   name: string;
   updated: Date;
   tags: string[];
 }
 
-const extractStory = (resource: Resource): Story => {
+export interface Story extends StoryMetadata {
+  body: ArrayBuffer;
+}
+
+export const getStories = async (): Promise<StoryMetadata[]> => {
+  const raw = await listFilesRaw("neilashford.dev", "stories/");
+  if (!raw.items) {
+    return [];
+  }
+
+  return raw.items
+    .filter(item => item.name !== "stories/")
+    .map(extractStoryMetadata);
+};
+
+export const getStory = async (story: string): Promise<Story> => {
+  const metaPromise = getFileMetadata("neilashford.dev", `stories%2F${story}`);
+  const dataPromise = getFile("neilashford.dev", `stories%2F${story}`);
+
+  const [meta, data] = await Promise.all([metaPromise, dataPromise]);
+
+  return { ...extractStoryMetadata(meta), body: data };
+};
+
+const extractStoryMetadata = (resource: Resource): StoryMetadata => {
   const path = resource.name.split("/");
   const [stories, name, ...end] = path;
   if (stories !== "stories" || end.length !== 0) {
@@ -23,13 +52,4 @@ const extractStory = (resource: Resource): Story => {
     updated: resource.updated,
     tags
   };
-};
-
-export const getStories = async (): Promise<Story[]> => {
-  const raw = await listFilesRaw("neilashford.dev", "stories/");
-  if (!raw.items) {
-    return [];
-  }
-
-  return raw.items.filter(item => item.name !== "stories/").map(extractStory);
 };

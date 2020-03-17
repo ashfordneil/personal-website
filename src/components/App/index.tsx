@@ -12,6 +12,7 @@ import css from "./App.module.scss";
 
 const Browser = React.lazy(async () => import("components/Browser"));
 const Default = React.lazy(async () => import("components/Default"));
+const StoryView = React.lazy(async () => import("components/StoryView"));
 
 const App: React.FC = () => {
   return (
@@ -24,6 +25,9 @@ const App: React.FC = () => {
               <Switch>
                 <Route path="/browse" exact>
                   <Browser />
+                </Route>
+                <Route path="/story/:story" exact>
+                  <StoryView />
                 </Route>
                 <Route path="/">
                   <Default />

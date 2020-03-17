@@ -78,3 +78,35 @@ export const listFilesRaw = async (
     items
   };
 };
+
+export const getFileMetadata = async (
+  bucket: string,
+  name: string
+): Promise<Resource> => {
+  const req = new URL(
+    `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${name}`
+  );
+  req.searchParams.append("alt", "json");
+  const res = await fetch(req.toString(), { method: "GET" });
+  const raw = await res.json();
+  return {
+    ...raw,
+    timeCreated: new Date(raw.timeCreated),
+    updated: new Date(raw.updated),
+    timeDeleted: new Date(raw.timeDeleted),
+    retentionExpirationTime: new Date(raw.retentionExpirationTime),
+    timeStorageClassUpdated: new Date(raw.timeStorageClassUpdated)
+  };
+};
+
+export const getFile = async (
+  bucket: string,
+  name: string
+): Promise<ArrayBuffer> => {
+  const req = new URL(
+    `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${name}`
+  );
+  req.searchParams.append("alt", "media");
+  const res = await fetch(req.toString(), { method: "GET" });
+  return await res.arrayBuffer();
+};

@@ -26,7 +26,7 @@ const ErrorFallback: React.FC<Props> = props => {
         </h2>
         <div className={css.body}>{string}</div>
         <div className={css.generic}>
-          Try refreshing the page, or see if there's a
+          Try refreshing the page, or see if there's a{" "}
           <Link href={link.toString()}>GitHub issue</Link> open for this.
         </div>
       </div>

@@ -1,0 +1,10 @@
+@import "styles/fonts";
+
+.heading {
+  @extend .font--heading;
+}
+
+.date {
+  @extend .font--body;
+  font-style: italic;
+}

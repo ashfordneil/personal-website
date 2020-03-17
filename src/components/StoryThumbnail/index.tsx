@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import useInterval from "utility/interval";
-import { Story } from "utility/stories";
+import { StoryMetadata } from "utility/stories";
 
 import css from "./StoryThumbnail.module.scss";
 
-const StoryThumbnail: React.FC<Story> = props => {
+const StoryThumbnail: React.FC<StoryMetadata> = props => {
   let tags = [...props.tags];
   while (tags.length < 3) {
     tags.push("");
