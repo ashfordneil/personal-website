@@ -18,4 +18,4 @@ jobs:
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
           CLI: gsutil
         with:
-          args: rsync -r build gs://neilashford.com
+          args: rsync -r build gs://neilashford.dev

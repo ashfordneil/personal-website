@@ -26,7 +26,7 @@ const extractStory = (resource: Resource): Story => {
 };
 
 export const getStories = async (): Promise<Story[]> => {
-  const raw = await listFilesRaw("neilashford.com", "stories/");
+  const raw = await listFilesRaw("neilashford.dev", "stories/");
   if (!raw.items) {
     return [];
   }
