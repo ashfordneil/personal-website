@@ -10,11 +10,10 @@ body {
 }
 
 .page {
-  @extend .font--body;
   @extend .outer-width;
 
   color: map-get($space, "starlight");
-  height: 100vh;
+  height: 100%;
   overflow-y: hidden;
   padding: 0;
   display: flex;

@@ -54,6 +54,7 @@
 }
 
 .tag {
+  @extend .font--body;
   transform: rotateX(var(--angle)) translateZ(1.5em);
   transition: 0.3s ease transform, 0.3s ease color;
   grid-column: 1;

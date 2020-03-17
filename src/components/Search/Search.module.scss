@@ -2,8 +2,10 @@
 @import "styles/color";
 
 .main {
-  @extend .font--body;
+  min-height: min-content;
   width: 100%;
+  max-width: 100%;
+  overflow-x: scroll;
   box-sizing: border-box;
   max-width: 60ch;
   background-color: map-get($space, "twilight");
@@ -29,7 +31,9 @@
 }
 
 .rawInput {
+  @extend .font--body;
   width: 100%;
+  min-width: 45ch;
   background: none;
   border: none;
   color: inherit;
@@ -46,6 +50,7 @@
 }
 
 .tag {
+  @extend .font--body;
   border-radius: 0.5em;
   padding: 0.5em 1ch;
   background-color: map-get($space, "night-sky");

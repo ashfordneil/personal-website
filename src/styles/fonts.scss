@@ -11,11 +11,12 @@ $font: Helvetica Neue, Helvetica, Arial, sans-serif;
 .font {
   font-family: $font;
   margin: 0;
+  max-width: 90ch;
 
   &--body {
     @extend .font;
     font-weight: 300;
-    line-height: 1.06;
+    line-height: 1.2;
     padding-top: 0.6em;
   }
 

@@ -10,10 +10,13 @@
   text-decoration: none;
 }
 
+.icon {
+  margin-right: 1ch;
+}
+
 .inner {
   @extend .font--body;
   padding: 0;
-  margin-left: 1ch;
 
   position: relative;
   text-decoration: underline;

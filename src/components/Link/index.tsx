@@ -6,7 +6,7 @@ import css from "./Link.module.scss";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 export interface Props {
-  icon: IconDefinition;
+  icon?: IconDefinition;
   children: React.ReactNode;
   href: string;
 }
@@ -28,7 +28,7 @@ const Link: React.FC<Props> = props => {
         ? { target: "_blank", rel: "noopener noreferrer" }
         : { onClick: onClick })}
     >
-      <FontAwesomeIcon icon={props.icon} />
+      {props.icon && <FontAwesomeIcon className={css.icon} icon={props.icon} />}
       <span className={css.inner}>{props.children}</span>
     </a>
   );

@@ -25,6 +25,11 @@ const Search: React.FC<Props> = props => {
       return;
     }
 
+    if (prettied.length === 0) {
+      // this tag is empty
+      return;
+    }
+
     props.setTags([...props.tags, prettied]);
     setText("");
   };

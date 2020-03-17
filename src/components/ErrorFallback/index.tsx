@@ -5,7 +5,6 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import Link from "components/Link";
 
 import css from "./ErrorFallback.module.scss";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export interface Props {
   error: Error;
@@ -27,11 +26,8 @@ const ErrorFallback: React.FC<Props> = props => {
         </h2>
         <div className={css.body}>{string}</div>
         <div className={css.generic}>
-          Try refreshing the page, or see if there's an{" "}
-          <Link icon={faGithub} href={link.toString()}>
-            issue
-          </Link>{" "}
-          open for this.
+          Try refreshing the page, or see if there's a
+          <Link href={link.toString()}>GitHub issue</Link> open for this.
         </div>
       </div>
     </div>
