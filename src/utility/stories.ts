@@ -13,7 +13,7 @@ export interface StoryMetadata {
 }
 
 export interface Story extends StoryMetadata {
-  body: ArrayBuffer;
+  body: string;
 }
 
 export const getStories = async (): Promise<StoryMetadata[]> => {
@@ -31,9 +31,9 @@ export const getStory = async (story: string): Promise<Story> => {
   const metaPromise = getFileMetadata("neilashford.dev", `stories%2F${story}`);
   const dataPromise = getFile("neilashford.dev", `stories%2F${story}`);
 
-  const [meta, data] = await Promise.all([metaPromise, dataPromise]);
+  const [meta, body] = await Promise.all([metaPromise, dataPromise]);
 
-  return { ...extractStoryMetadata(meta), body: data };
+  return { ...extractStoryMetadata(meta), body };
 };
 
 const extractStoryMetadata = (resource: Resource): StoryMetadata => {
