@@ -1,10 +1,27 @@
 @import "styles/fonts";
 
-.heading {
+.title {
   @extend .font--heading;
 }
 
 .date {
   @extend .font--body;
   font-style: italic;
+}
+
+.paragraph {
+  @extend .font--body;
+}
+
+.heading {
+  @extend .font--heading;
+}
+
+.em {
+  @extend .font--body;
+  font-style: italic;
+}
+
+.strong {
+  @extend .font--bold;
 }

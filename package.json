@@ -6,6 +6,7 @@
   "devDependencies": {
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
+    "@types/remarkable": "^1.7.4",
     "node-sass": "^4.13.1",
     "react-scripts": "^3.4.0",
     "typescript": "^3.8.3"
@@ -19,7 +20,8 @@
     "react": "^0.0.0-experimental-8b155d261",
     "react-dom": "^0.0.0-experimental-8b155d261",
     "react-router": "^5.1.2",
-    "react-suspense-fetch": "^0.2.1"
+    "react-suspense-fetch": "^0.2.1",
+    "remarkable": "^1.7.4"
   },
   "browserslist": {
     "production": [
