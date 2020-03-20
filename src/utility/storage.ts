@@ -66,6 +66,7 @@ export const listFilesRaw = async (
     raw.items &&
     raw.items.map((item: any) => ({
       ...item,
+      metadata: item.metadata || {},
       timeCreated: new Date(item.timeCreated),
       updated: new Date(item.updated),
       timeDeleted: new Date(item.timeDeleted),
@@ -91,6 +92,7 @@ export const getFileMetadata = async (
   const raw = await res.json();
   return {
     ...raw,
+    metadata: raw.metadata || {},
     timeCreated: new Date(raw.timeCreated),
     updated: new Date(raw.updated),
     timeDeleted: new Date(raw.timeDeleted),
