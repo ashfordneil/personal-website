@@ -27,6 +27,11 @@ $font: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-weight: 500;
   }
 
+  &--mono {
+    @extend .font--body;
+    font-family: "Andale Mono", monospace;
+  }
+
   &--heading {
     @extend .font;
     font-weight: 500;

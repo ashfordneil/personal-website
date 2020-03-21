@@ -3,7 +3,9 @@ import Remarkable, {
   HeadingToken,
   TextToken,
   BlockContentToken,
-  LinkOpenToken
+  LinkOpenToken,
+  ImageToken,
+  CodeToken
 } from "remarkable";
 
 // Here we convert the output from remarkable to a more react-friendly tree
@@ -23,6 +25,15 @@ export interface LinkNode {
   // where to link to
   href: string;
   children: TreeNode[];
+}
+
+// ![alt](src)
+export interface ImageNode {
+  type: "image";
+  // where the image is
+  src: string;
+  // what to show if there is no image
+  alt: string;
 }
 
 // Just a regular paragraph
@@ -45,6 +56,12 @@ export interface StrongNode {
   children: TreeNode[];
 }
 
+// `Code`
+export interface CodeNode {
+  type: "code";
+  data: string;
+}
+
 // Just plain old text.
 export interface TextNode {
   type: "text";
@@ -62,9 +79,11 @@ export interface InlineNode {
 export type TreeNode =
   | HeadingNode
   | LinkNode
+  | ImageNode
   | ParagraphNode
   | EmNode
   | StrongNode
+  | CodeNode
   | TextNode
   | InlineNode;
 
@@ -87,9 +106,16 @@ const toTree = (tokens: Token[]): TreeNode[] => {
         case "softbreak":
           output.push({ type: "text", data: "\n" });
           break;
+        case "code":
+          output.push({ type, data: (next as CodeToken).content || "" });
+          break;
         case "inline":
           const children = toTree((next as BlockContentToken).children || []);
           output.push({ type, children });
+          break;
+        case "image":
+          const { src, alt } = next as ImageToken;
+          output.push({ type, src, alt });
           break;
         default:
           throw new Error(`Unknown markdown token: ${type}`);
@@ -173,12 +199,26 @@ const parse = (input: string): TreeNode[] => {
 };
 
 export const getChildren = (tree: TreeNode): TreeNode[] | null => {
-  if (tree.type !== "text") {
+  if (tree.type !== "text" && tree.type !== "image" && tree.type !== "code") {
     const children: TreeNode[] = tree.children;
     return children;
   } else {
     return null;
   }
+};
+
+export const hasDescendentOfType = (node: TreeNode, type: string): boolean => {
+  if (node.type === type) {
+    return true;
+  }
+
+  for (let child of getChildren(node) || []) {
+    if (hasDescendentOfType(child, type)) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 export default parse;

@@ -29,6 +29,10 @@
   @extend .font--bold;
 }
 
+.code {
+  @extend .font--mono;
+}
+
 .footer {
   @extend .font--body;
   margin: 1em 5ch 0;

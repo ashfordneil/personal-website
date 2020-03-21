@@ -6,9 +6,14 @@ import ErrorBoundary from "components/ErrorBoundary";
 import ErrorFallback from "components/ErrorFallback";
 import Link from "components/Link";
 import Spinner from "components/Spinner";
+import UnderConstruction from "components/UnderConstruction";
 
 import { getStory, Story } from "utility/stories";
-import parse, { TreeNode, getChildren } from "utility/markdown";
+import parse, {
+  TreeNode,
+  getChildren,
+  hasDescendentOfType
+} from "utility/markdown";
 
 import css from "./StoryView.module.scss";
 
@@ -61,6 +66,10 @@ const StoryBody: React.FC<Story> = props => {
 };
 
 const RenderTree: React.FC<TreeNode> = node => {
+  if (hasDescendentOfType(node, "image")) {
+    return <UnderConstruction ticket={3} />;
+  }
+
   const children = (getChildren(node) || []).map((node, i) => (
     <RenderTree key={i} {...node} />
   ));
@@ -77,6 +86,8 @@ const RenderTree: React.FC<TreeNode> = node => {
       return <em className={css.em}>{children}</em>;
     case "strong":
       return <strong className={css.strong}>{children}</strong>;
+    case "code":
+      return <code className={css.code}>{node.data}</code>;
     case "text":
       return <>{node.data}</>;
     case "inline":
