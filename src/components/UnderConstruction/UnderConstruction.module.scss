@@ -8,10 +8,12 @@
 
 .body {
   @extend .font--bold;
-  color: map-get($space, "starlight");
 }
 
 .generic {
   @extend .font--body;
   color: map-get($space, "shooting-star");
+  @media (prefers-color-scheme: light) {
+    color: map-get($space, "twilight");
+  }
 }

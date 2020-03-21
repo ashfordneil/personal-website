@@ -6,14 +6,14 @@
 $space--hue: 220;
 $space: (
   "starlight": hsl($space--hue, 5%, 95%),
-  "shooting-star": hsl($space--hue, 5%, 70%),
-  "twilight": hsl($space--hue, 15%, 30%),
+  "shooting-star": hsl($space--hue, 20%, 70%),
+  "twilight": hsl($space--hue, 25%, 35%),
   "night-sky": hsl($space--hue, 10%, 16%),
-  "opaque": hsl($space--hue, 15%, 11%)
+  "opaque": hsl($space--hue, 20%, 11%)
 );
 
 // The "semantic" colours. These are used to convey meaning.
 $semantic: (
   "error": hsl(340, 67%, 50%),
-  "warning": hsl(46, 96%, 50%)
+  "warning": hsl(46, 96%, 40%)
 );

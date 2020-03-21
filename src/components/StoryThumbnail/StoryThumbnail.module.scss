@@ -29,6 +29,9 @@
   }
   .main:hover {
     background-color: map-get($space, "twilight");
+    @media (prefers-color-scheme: light) {
+      background-color: map-get($space, "shooting-star");
+    }
   }
 }
 
@@ -62,10 +65,16 @@
   backface-visibility: hidden;
 
   color: map-get($space, "shooting-star");
+  @media (prefers-color-scheme: light) {
+    color: map-get($space, "twilight");
+  }
 
   &0 {
     --angle: 0;
     color: map-get($space, "starlight");
+    @media (prefers-color-scheme: light) {
+      color: map-get($space, "night-sky");
+    }
   }
   &1 {
     --angle: 45deg;

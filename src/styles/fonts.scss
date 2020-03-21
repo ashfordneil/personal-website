@@ -14,6 +14,9 @@ $font: Helvetica Neue, Helvetica, Arial, sans-serif;
   max-width: 90ch;
 
   letter-spacing: 0.05ch;
+  @media (prefers-color-scheme: light) {
+    letter-spacing: inherit;
+  }
 
   &--body {
     @extend .font;

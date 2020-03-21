@@ -18,9 +18,15 @@
 .body {
   @extend .font--bold;
   color: map-get($space, "starlight");
+  @media (prefers-color-scheme: light) {
+    color: map-get($space, "night-sky");
+  }
 }
 
 .generic {
   @extend .font--body;
   color: map-get($space, "shooting-star");
+  @media (prefers-color-scheme: light) {
+    color: map-get($space, "twilight");
+  }
 }

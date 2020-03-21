@@ -38,5 +38,8 @@
   margin: 1em 5ch 0;
   max-width: 80ch;
   border-top: 2px solid map-get($space, "twilight");
+  @media (prefers-color-scheme: light) {
+    border-top-color: map-get($space, "shooting-star");
+  }
   text-align: right;
 }

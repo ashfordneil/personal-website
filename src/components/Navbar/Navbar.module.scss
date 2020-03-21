@@ -8,7 +8,9 @@ $easing: 0.6s ease;
   @extend .outer-width;
   padding-top: env(safe-area-inset-top);
   background-color: map-get($space, "opaque");
-  color: map-get($space, "starlight");
+  @media (prefers-color-scheme: light) {
+    background-color: map-get($space, "shooting-star");
+  }
   top: 0;
   position: sticky;
 }

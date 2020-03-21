@@ -2,6 +2,9 @@
 
 .main {
   color: map-get($space, "starlight");
+  @media (prefers-color-scheme: light) {
+    color: map-get($space, "night-sky");
+  }
 }
 
 .inner {

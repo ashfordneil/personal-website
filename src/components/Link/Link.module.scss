@@ -24,4 +24,7 @@
 
 .main:visited {
   color: map-get($space, "shooting-star");
+  @media (prefers-color-scheme: light) {
+    color: map-get($space, "twilight");
+  }
 }
