@@ -102,11 +102,11 @@ export const getFileMetadata = async (
 export const getFile = async (
   bucket: string,
   name: string
-): Promise<ArrayBuffer> => {
+): Promise<string> => {
   const req = new URL(
     `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${name}`
   );
   req.searchParams.append("alt", "media");
   const res = await fetch(req.toString(), { method: "GET" });
-  return await res.arrayBuffer();
+  return await res.text();
 };

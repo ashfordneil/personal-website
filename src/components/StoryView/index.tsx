@@ -1,42 +1,101 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense } from "react";
 import { useRouteMatch } from "react-router";
-import { prefetch, refetch } from "react-suspense-fetch";
+import { prefetch } from "react-suspense-fetch";
 
+import ErrorBoundary from "components/ErrorBoundary";
+import ErrorFallback from "components/ErrorFallback";
+import Link from "components/Link";
+import Spinner from "components/Spinner";
 import UnderConstruction from "components/UnderConstruction";
 
-import { getStory } from "utility/stories";
+import { getStory, Story } from "utility/stories";
+import parse, {
+  TreeNode,
+  getChildren,
+  hasDescendentOfType
+} from "utility/markdown";
 
-import css from "./Story.module.scss";
+import css from "./StoryView.module.scss";
 
 const StoryView: React.FC = () => {
   const story = useStoryName();
-  const [data, setData] = useState(initialResult);
-  useEffect(() => {
-    setData(refetch(data, story));
-  }, [story]);
+  const data = prefetch(getStory, story);
+
+  return (
+    <Suspense fallback={<Spinner big />}>
+      <RenderStory get={() => data} />
+    </Suspense>
+  );
+};
+
+interface RenderProps {
+  get: () => Story;
+}
+
+const RenderStory: React.FC<RenderProps> = props => {
+  const story = props.get();
+  const similar = new URL("/browse", window.location.href);
+  story.tags.forEach(tag => similar.searchParams.append("search", tag));
 
   return (
     <>
-      <h1 className={css.heading}>{data.name}</h1>
-      <span className={css.date}>{data.updated.toLocaleDateString()}</span>
-      <UnderConstruction ticket={1} />
+      <h1 className={css.title}>{story.name}</h1>
+      <span className={css.date}>{story.updated.toLocaleDateString()}</span>
+      <ErrorBoundary fallback={ErrorFallback}>
+        <StoryBody {...story} />
+      </ErrorBoundary>
+      <footer className={css.footer}>
+        – Neil
+        <br />
+        If you liked this post,{" "}
+        <Link href={similar.toString()}> here is a link to some like it</Link>
+      </footer>
     </>
   );
 };
 
-// performed directly so we can fetch before we render
-const getStoryName = (): string => {
-  const { pathname } = window.location;
-  const match = pathname.match(/^\/story\/([^/]*)$/);
-  if (!match) {
-    throw new Error("Story component loaded at incorrect URL");
-  }
-
-  return match[1];
+const StoryBody: React.FC<Story> = props => {
+  const tree = parse(props.body);
+  return (
+    <>
+      {tree.map((node, i) => (
+        <RenderTree key={i} {...node} />
+      ))}
+    </>
+  );
 };
 
-// pre-fetched data
-const initialResult = prefetch(getStory, getStoryName());
+const RenderTree: React.FC<TreeNode> = node => {
+  if (hasDescendentOfType(node, "image")) {
+    return <UnderConstruction ticket={3} />;
+  }
+
+  const children = (getChildren(node) || []).map((node, i) => (
+    <RenderTree key={i} {...node} />
+  ));
+
+  switch (node.type) {
+    case "heading":
+      const Component = `h${node.level}` as "h1";
+      return <Component className={css.heading}>{children}</Component>;
+    case "link":
+      return <Link href={node.href}>{children}</Link>;
+    case "paragraph":
+      return <p className={css.paragraph}>{children}</p>;
+    case "em":
+      return <em className={css.em}>{children}</em>;
+    case "strong":
+      return <strong className={css.strong}>{children}</strong>;
+    case "code":
+      return <code className={css.code}>{node.data}</code>;
+    case "text":
+      return <>{node.data}</>;
+    case "inline":
+      return <>{children}</>;
+    default:
+      return null;
+  }
+};
 
 // implemented as a react hook that will update as things change
 const useStoryName = (): string => {
