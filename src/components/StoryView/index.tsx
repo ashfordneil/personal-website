@@ -80,6 +80,10 @@ const RenderTree: React.FC<TreeNode> = node => {
       return <Component className={css.heading}>{children}</Component>;
     case "link":
       return <Link href={node.href}>{children}</Link>;
+    case "bullet_list":
+      return <ul>{children}</ul>;
+    case "list_item":
+      return <li className={css.listItem}>{children}</li>;
     case "paragraph":
       return <p className={css.paragraph}>{children}</p>;
     case "em":

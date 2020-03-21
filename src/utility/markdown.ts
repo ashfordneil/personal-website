@@ -27,6 +27,19 @@ export interface LinkNode {
   children: TreeNode[];
 }
 
+// Wrapper element around a series of
+// - Content
+export interface ListNode {
+  type: "bullet_list";
+  children: TreeNode[];
+}
+
+// - Content
+export interface ListItemNode {
+  type: "list_item";
+  children: TreeNode[];
+}
+
 // ![alt](src)
 export interface ImageNode {
   type: "image";
@@ -79,6 +92,8 @@ export interface InlineNode {
 export type TreeNode =
   | HeadingNode
   | LinkNode
+  | ListNode
+  | ListItemNode
   | ImageNode
   | ParagraphNode
   | EmNode
@@ -178,6 +193,8 @@ const extractSiblings = (tokens: Token[], output: TreeNode[]): boolean => {
       const href = (next as LinkOpenToken).href;
       output.push({ type, href, children });
       break;
+    case "bullet_list":
+    case "list_item":
     case "paragraph":
     case "em":
     case "strong":
