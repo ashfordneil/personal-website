@@ -35,7 +35,7 @@ const StoryThumbnail: React.FC<StoryMetadata> = props => {
     >
       <div className={css.info}>
         <h3 className={css.name}>{props.name}</h3>
-        <div className={css.date}>{props.updated.toLocaleDateString()}</div>
+        <div className={css.date}>{props.created.toLocaleDateString()}</div>
       </div>
       <div className={css.tags}>
         {tags.map((tag, i) => (
