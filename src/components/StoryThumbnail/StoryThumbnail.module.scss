@@ -3,12 +3,8 @@
 
 .main {
   padding: 0.5rem 2ch 1rem;
-  height: min-content;
-  display: grid;
-  grid-template-areas: "name tag" "date tag";
-  grid-template-columns: 60% 40%;
-  grid-template-rows: 1em 1em;
-  grid-row-gap: 0.6rem;
+  display: flex;
+  align-items: center;
   cursor: pointer;
 }
 
@@ -30,14 +26,18 @@
   }
 }
 
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .name {
-  grid-area: name;
   @extend .font--heading;
   padding: 0;
 }
 
 .date {
-  grid-area: date;
   @extend .font--body;
   padding: 0;
   font-style: italic;
@@ -46,40 +46,39 @@
 
 .tags {
   margin: auto 0;
-  grid-area: tag;
   display: grid;
-  perspective: 15rem;
 }
 
 .tag {
   @extend .font--body;
-  transform: rotateX(var(--angle)) translateZ(1.5em);
-  transition: 0.3s ease transform, 0.3s ease opacity;
+  transition: 0.3s ease-in-out transform, 0.3s ease-in-out opacity;
+  opacity: 0;
+  transform-origin: center;
   grid-column: 1;
   grid-row: 1;
-  backface-visibility: hidden;
 
-  opacity: 0.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  &0 {
-    --angle: 0;
-    opacity: 1;
-  }
-  &1 {
-    --angle: 45deg;
-  }
-  &Neg1 {
-    --angle: -45deg;
-  }
-  &2 {
-    --angle: 90deg;
-  }
-  &Neg2 {
-    --angle: -90deg;
-    transition: none;
-  }
-  &Hidden {
-    --angle: -180deg;
-    transition: none;
-  }
+.here {
+  transform: none;
+  opacity: 1;
+}
+
+.arriving {
+  transform: translateX(-100%) scale(0);
+}
+
+.leaving {
+  transform: translateX(100%) scale(0);
+}
+
+.hidden {
+  transition: none;
+}
+
+.tagIcon {
+  font-size: 2rem;
 }

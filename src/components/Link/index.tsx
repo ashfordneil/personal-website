@@ -1,9 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 import css from "./Link.module.scss";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 export interface Props {
   icon?: IconDefinition;
