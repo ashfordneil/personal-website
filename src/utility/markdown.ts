@@ -2,7 +2,8 @@ import Remarkable, {
   Token,
   HeadingToken,
   TextToken,
-  BlockContentToken
+  BlockContentToken,
+  LinkOpenToken
 } from "remarkable";
 
 // Here we convert the output from remarkable to a more react-friendly tree
@@ -13,6 +14,14 @@ export interface HeadingNode {
   type: "heading";
   // h1 -> h6
   level: 1 | 2 | 3 | 4 | 5 | 6;
+  children: TreeNode[];
+}
+
+// [content](href)
+export interface LinkNode {
+  type: "link";
+  // where to link to
+  href: string;
   children: TreeNode[];
 }
 
@@ -52,6 +61,7 @@ export interface InlineNode {
 // catching errors, I guess.
 export type TreeNode =
   | HeadingNode
+  | LinkNode
   | ParagraphNode
   | EmNode
   | StrongNode
@@ -137,6 +147,10 @@ const extractSiblings = (tokens: Token[], output: TreeNode[]): boolean => {
         level,
         children
       });
+      break;
+    case "link":
+      const href = (next as LinkOpenToken).href;
+      output.push({ type, href, children });
       break;
     case "paragraph":
     case "em":

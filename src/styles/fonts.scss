@@ -13,6 +13,8 @@ $font: Helvetica Neue, Helvetica, Arial, sans-serif;
   margin: 0;
   max-width: 90ch;
 
+  letter-spacing: 0.05ch;
+
   &--body {
     @extend .font;
     font-weight: 300;

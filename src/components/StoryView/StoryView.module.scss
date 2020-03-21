@@ -1,3 +1,4 @@
+@import "styles/color";
 @import "styles/fonts";
 
 .title {
@@ -7,6 +8,7 @@
 .date {
   @extend .font--body;
   font-style: italic;
+  padding-top: 0;
 }
 
 .heading {
@@ -15,6 +17,7 @@
 
 .paragraph {
   @extend .font--body;
+  margin-top: 1em;
 }
 
 .em {
@@ -24,4 +27,12 @@
 
 .strong {
   @extend .font--bold;
+}
+
+.footer {
+  @extend .font--body;
+  margin: 1em 5ch 0;
+  max-width: 80ch;
+  border-top: 2px solid map-get($space, "twilight");
+  text-align: right;
 }

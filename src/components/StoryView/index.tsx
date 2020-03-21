@@ -4,6 +4,7 @@ import { prefetch } from "react-suspense-fetch";
 
 import ErrorBoundary from "components/ErrorBoundary";
 import ErrorFallback from "components/ErrorFallback";
+import Link from "components/Link";
 import Spinner from "components/Spinner";
 
 import { getStory, Story } from "utility/stories";
@@ -28,6 +29,8 @@ interface RenderProps {
 
 const RenderStory: React.FC<RenderProps> = props => {
   const story = props.get();
+  const similar = new URL("/browse", window.location.href);
+  story.tags.forEach(tag => similar.searchParams.append("search", tag));
 
   return (
     <>
@@ -36,6 +39,12 @@ const RenderStory: React.FC<RenderProps> = props => {
       <ErrorBoundary fallback={ErrorFallback}>
         <StoryBody {...story} />
       </ErrorBoundary>
+      <footer className={css.footer}>
+        – Neil
+        <br />
+        If you liked this post,{" "}
+        <Link href={similar.toString()}> here is a link to some like it</Link>
+      </footer>
     </>
   );
 };
@@ -60,6 +69,8 @@ const RenderTree: React.FC<TreeNode> = node => {
     case "heading":
       const Component = `h${node.level}` as "h1";
       return <Component className={css.heading}>{children}</Component>;
+    case "link":
+      return <Link href={node.href}>{children}</Link>;
     case "paragraph":
       return <p className={css.paragraph}>{children}</p>;
     case "em":
