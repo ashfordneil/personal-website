@@ -9,12 +9,12 @@
   font-style: italic;
 }
 
-.paragraph {
-  @extend .font--body;
-}
-
 .heading {
   @extend .font--heading;
+}
+
+.paragraph {
+  @extend .font--body;
 }
 
 .em {
