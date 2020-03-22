@@ -15,6 +15,12 @@
   @extend .font--heading;
 }
 
+.listItem {
+  p {
+    margin: 0;
+  }
+}
+
 .paragraph {
   @extend .font--body;
   margin-top: 1em;
