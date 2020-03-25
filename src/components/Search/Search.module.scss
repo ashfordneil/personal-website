@@ -57,6 +57,7 @@
   background-color: map-get($space, "night-sky");
   margin-right: 1ch;
   cursor: pointer;
+  white-space: nowrap;
 
   position: relative;
 }
