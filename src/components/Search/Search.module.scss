@@ -16,9 +16,6 @@
   font-size: inherit;
   align-self: center;
 
-  top: 0;
-  position: sticky;
-  z-index: 1;
   border: 2px solid map-get($space, "opaque");
 
   display: flex;
