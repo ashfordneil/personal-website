@@ -9,7 +9,11 @@ import Link from "components/Link";
 import Spinner from "components/Spinner";
 
 import { getStory, Story } from "utility/stories";
-import parse, { TreeNode, getChildren } from "utility/markdown";
+import parse, {
+  TreeNode,
+  getChildren,
+  extractDescendentsOfType
+} from "utility/markdown";
 
 import css from "./StoryView.module.scss";
 
@@ -62,6 +66,11 @@ const StoryBody: React.FC<Story> = props => {
 };
 
 const RenderTree: React.FC<TreeNode> = node => {
+  // Some elements (like paragraph) cannot have img nodes as children in valid
+  // HTML. If we're about to render one of those, extract the images from the
+  // child list first so it can be rendered below.
+  const images =
+    node.type === "paragraph" ? extractDescendentsOfType(node, "image") : [];
   const children = (getChildren(node) || []).map((node, i) => (
     <RenderTree key={i} {...node} />
   ));
@@ -77,7 +86,14 @@ const RenderTree: React.FC<TreeNode> = node => {
     case "list_item":
       return <li className={css.listItem}>{children}</li>;
     case "paragraph":
-      return <p className={css.paragraph}>{children}</p>;
+      return (
+        <>
+          <p className={css.paragraph}>{children}</p>
+          {images.map((node, i) => (
+            <RenderTree key={i} {...node} />
+          ))}
+        </>
+      );
     case "em":
       return <em className={css.em}>{children}</em>;
     case "strong":

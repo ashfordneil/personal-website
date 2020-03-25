@@ -224,18 +224,25 @@ export const getChildren = (tree: TreeNode): TreeNode[] | null => {
   }
 };
 
-export const hasDescendentOfType = (node: TreeNode, type: string): boolean => {
-  if (node.type === type) {
-    return true;
+export const extractDescendentsOfType = (
+  node: TreeNode,
+  type: string
+): TreeNode[] => {
+  const children = getChildren(node);
+  if (!children) {
+    return [];
   }
 
-  for (let child of getChildren(node) || []) {
-    if (hasDescendentOfType(child, type)) {
-      return true;
+  let output = [] as TreeNode[];
+  for (let i = children.length - 1; i >= 0; --i) {
+    if (children[i].type === type) {
+      output = children.splice(i, 1).concat(output);
+    } else {
+      output = extractDescendentsOfType(children[i], type).concat(output);
     }
   }
 
-  return false;
+  return output;
 };
 
 export default parse;
