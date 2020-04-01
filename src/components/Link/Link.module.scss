@@ -3,7 +3,7 @@
 
 .main {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
 
   cursor: pointer;
   color: inherit;
@@ -11,6 +11,8 @@
 }
 
 .icon {
+  @extend .accent;
+  color: var(--accent);
   margin-right: 1ch;
 }
 
@@ -20,8 +22,4 @@
 
   position: relative;
   text-decoration: underline;
-}
-
-.main:visited {
-  color: map-get($space, "shooting-star");
 }

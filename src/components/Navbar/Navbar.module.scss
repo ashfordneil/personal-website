@@ -2,96 +2,28 @@
 @import "styles/color";
 @import "styles/fonts";
 
-$easing: 0.6s ease;
-
 .wrapper {
-  @extend .outer-width;
-  padding-top: env(safe-area-inset-top);
-  background-color: map-get($space, "opaque");
-  color: map-get($space, "starlight");
-  top: 0;
-  position: sticky;
-}
-
-.main {
-  padding: 0.5rem 0;
   @extend .inner-width;
-
-  // on big screens, display links alongside name
-  @media (min-width: 100ch) {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
-  }
-
-  // on small screens, display links on top of name (real styles below use
-  // transform)
-  @media (max-width: 99.9ch) {
-    overflow-x: hidden;
-    display: grid;
-
-    .active,
-    .left,
-    .right {
-      grid-column: 1;
-      grid-row: 1;
-    }
-  }
 }
 
-// don't display unless we get a small screen
-.icon {
-  display: none;
-}
-
-// the small screen specifics
-@media (max-width: 99.9ch) {
-  .icon {
-    display: block;
-    cursor: pointer;
-    transition: $easing opacity;
-  }
-
-  .active,
-  .left,
-  .right {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    transition: 0.6s ease transform;
-  }
-
-  .active {
-    transform: 0;
-  }
-
-  .left {
-    transform: translateX(-110%);
-
-    .icon {
-      opacity: 0;
-    }
-  }
-
-  .right {
-    transform: translateX(110%);
-
-    .icon {
-      opacity: 0;
-    }
-  }
-}
-
-.myname {
+.name {
   @extend .font--heading;
-  padding: 0;
-  font-size: 1.2rem;
+}
+
+.bold {
+  @extend .font--bold;
+}
+
+.band {
+  @extend .brand;
+  background-image: linear-gradient(to right, var(--primary), var(--secondary));
+  width: 100vw;
+  height: 0.5rem;
+  margin-top: 1rem;
 }
 
 .links {
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  grid-column-gap: 2ch;
+  grid-column-gap: 4ch;
+  grid-template-columns: repeat(3, min-content);
 }

@@ -1,19 +1,55 @@
 // This is where all the colours used in the site are defined. No using colours
 // not from this file.
 
-// The "space" colours. These are used as the base colours of the app, for
-// things like backgrounds and text.
-$space--hue: 220;
-$space: (
-  "starlight": hsl($space--hue, 5%, 95%),
-  "shooting-star": hsl($space--hue, 5%, 70%),
-  "twilight": hsl($space--hue, 15%, 30%),
-  "night-sky": hsl($space--hue, 10%, 16%),
-  "opaque": hsl($space--hue, 15%, 11%)
-);
+// The "base" colours. These are used for everyday things in the app, like text
+// colours and backgrounds.
+.base {
+  background-color: hsl(0, 0%, 15%);
+  --color: hsl(0, 0%, 85%);
+  color: var(--color);
+
+  @media (prefers-color-scheme: light) {
+    background-color: hsl(0, 0%, 100%);
+    --color: hsl(0, 0%, 0%);
+  }
+}
+
+// The "brand" colours. These are used for things directly associated with my
+// personal brand (eg the gradient underneath the bar)
+.brand {
+  --primary: #{hsl(288, 100%, 70%)};
+  --secondary: hsl(228, 100%, 65%);
+
+  @media (prefers-color-scheme: light) {
+    --primary: hsl(288, 100%, 50%);
+    --secondary: hsl(228, 100%, 60%);
+  }
+}
+
+// The "accent" colours. These are used for things that should be highlighted,
+// or seen as more important. They are related to but separate from the brand
+// colours.
+.accent {
+  --accent: hsl(288, 80%, 85%);
+
+  @media (prefers-color-scheme: light) {
+    --accent: hsl(288, 100%, 32%);
+  }
+}
 
 // The "semantic" colours. These are used to convey meaning.
-$semantic: (
-  "error": hsl(340, 67%, 50%),
-  "warning": hsl(46, 96%, 50%)
-);
+.error {
+  color: hsl(340, 100%, 66%);
+
+  @media (prefers-color-scheme: light) {
+    color: hsl(340, 67%, 50%);
+  }
+}
+
+.warning {
+  color: hsl(46, 96%, 50%);
+
+  @media (prefers-color-scheme: light) {
+    color: hsl(46, 100%, 28%);
+  }
+}

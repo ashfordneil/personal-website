@@ -13,7 +13,8 @@
 }
 
 .main {
-  border-bottom: 2px solid map-get($space, "twilight");
+  @extend .base;
+  border-bottom: 2px solid var(--color);
 
   &:last-of-type {
     border-bottom: none;
@@ -26,9 +27,6 @@
     border-radius: 0.5rem;
     border-bottom: none;
     padding-bottom: 0.5rem;
-  }
-  .main:hover {
-    background-color: map-get($space, "twilight");
   }
 }
 
@@ -56,16 +54,16 @@
 .tag {
   @extend .font--body;
   transform: rotateX(var(--angle)) translateZ(1.5em);
-  transition: 0.3s ease transform, 0.3s ease color;
+  transition: 0.3s ease transform, 0.3s ease opacity;
   grid-column: 1;
   grid-row: 1;
   backface-visibility: hidden;
 
-  color: map-get($space, "shooting-star");
+  opacity: 0.5;
 
   &0 {
     --angle: 0;
-    color: map-get($space, "starlight");
+    opacity: 1;
   }
   &1 {
     --angle: 45deg;
