@@ -3,6 +3,15 @@
 @import "styles/fonts";
 
 .wrapper {
+  @extend .base;
+  @extend .outer-width;
+  top: 0;
+  position: sticky;
+  z-index: 2;
+}
+
+.main {
+  padding-top: env(safe-area-inset-top);
   @extend .inner-width;
 }
 

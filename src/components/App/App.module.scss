@@ -12,18 +12,12 @@ body {
 .page {
   @extend .outer-width;
 
-  height: 100%;
-  overflow-y: hidden;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+  overflow-y: visible;
 }
 
 .main {
   @extend .inner-width;
   padding-top: 1rem;
-  flex: 1;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }

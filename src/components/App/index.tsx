@@ -17,8 +17,8 @@ const StoryView = React.lazy(async () => import("components/StoryView"));
 const App: React.FC = () => {
   return (
     <Router history={history}>
+      <Navbar />
       <div className={css.page}>
-        <Navbar />
         <div className={css.main}>
           <ErrorBoundary fallback={ErrorFallback}>
             <Suspense fallback={<Spinner big />}>
