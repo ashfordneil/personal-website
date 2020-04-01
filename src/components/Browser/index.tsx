@@ -15,17 +15,17 @@ const Browser: React.FC = () => {
   const params = new URLSearchParams(location.search)
     .getAll("search")
     .map(str => str.trim());
-  const [tags, setTags] = useState<string[]>(params);
+  const [search, setSearch] = useState(params.join(" "));
 
   return (
     <>
       <Search
         placeholder="Search for anything..."
-        setTags={setTags}
-        tags={tags}
+        value={search}
+        setValue={setSearch}
       />
       <Suspense fallback={<Spinner big />}>
-        <RenderResults tags={tags} />
+        <RenderResults tags={search.split(" ")} />
       </Suspense>
     </>
   );

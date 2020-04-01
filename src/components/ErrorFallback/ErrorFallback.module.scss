@@ -12,15 +12,13 @@
 
 .heading {
   @extend .font--heading;
-  color: map-get($semantic, "error");
+  @extend .error;
 }
 
 .body {
   @extend .font--bold;
-  color: map-get($space, "starlight");
 }
 
 .generic {
   @extend .font--body;
-  color: map-get($space, "shooting-star");
 }
