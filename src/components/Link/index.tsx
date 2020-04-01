@@ -14,24 +14,36 @@ export interface Props {
 const Link: React.FC<Props> = props => {
   const history = useHistory();
   const url = new URL(props.href, window.location.href);
-  const isLocal = url.origin === window.origin;
 
-  const onClick = () => {
-    history.push(url);
-  };
-
-  return (
-    <a
-      className={css.main}
-      href={props.href}
-      {...(isLocal
-        ? { target: "_blank", rel: "noopener noreferrer" }
-        : { onClick: onClick })}
-    >
+  const body = (
+    <>
       {props.icon && <FontAwesomeIcon className={css.icon} icon={props.icon} />}
       <span className={css.inner}>{props.children}</span>
-    </a>
+    </>
   );
+
+  if (url.origin === window.origin) {
+    const onClick = () => {
+      history.push(props.href);
+    };
+
+    return (
+      <button className={css.main} onClick={onClick}>
+        {body}
+      </button>
+    );
+  } else {
+    return (
+      <a
+        className={css.main}
+        href={props.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {body}
+      </a>
+    );
+  }
 };
 
 export default Link;

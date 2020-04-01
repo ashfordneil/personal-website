@@ -2,12 +2,20 @@
 @import "styles/color";
 
 .main {
+  // make it look nice
   display: inline-flex;
   align-items: center;
 
-  cursor: pointer;
+  // stop the browser making it look not nice
   color: inherit;
+  background-color: inherit;
+  border: none;
+  font-size: inherit;
+  padding: 0;
   text-decoration: none;
+
+  // make it interactive
+  cursor: pointer;
 }
 
 .icon {
