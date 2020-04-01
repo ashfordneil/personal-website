@@ -1,84 +1,30 @@
 @import "styles/fonts";
 @import "styles/color";
 
-.main {
-  min-height: min-content;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: scroll;
-  box-sizing: border-box;
-  max-width: 60ch;
-  background-color: map-get($space, "twilight");
-  color: map-get($space, "starlight");
-  border: none;
-  border-radius: 0.5em;
-  padding: 0.5rem 1ch;
-  font-size: inherit;
+.wrapper {
   align-self: center;
-
-  border: 2px solid map-get($space, "opaque");
-
-  display: flex;
-  align-items: baseline;
-}
-
-.form {
-  margin: 0.5rem 0;
-  flex: 1;
-}
-
-.rawInput {
-  @extend .font--body;
-  padding-top: 0;
   width: 100%;
-  min-width: 45ch;
-  background: none;
-  border: none;
-  color: inherit;
-  font-size: inherit;
-
-  &::placeholder {
-    color: map-get($space, "shooting-star");
-  }
-
-  &:focus {
-    border: none;
-    outline: none;
-  }
+  max-width: 60ch;
 }
 
-.tag {
+.input {
+  @extend .accent;
   @extend .font--body;
-  border-radius: 0.5em;
-  padding: 0.5em 1ch;
-  background-color: map-get($space, "night-sky");
-  margin-right: 1ch;
-  cursor: pointer;
+  width: 100%;
 
-  position: relative;
-}
+  // remove bad defaults
+  font-size: inherit;
+  background: none;
+  color: inherit;
 
-.closeTag {
-  font-size: 0.8rem;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  transform: translate(40%, -40%);
-  background-color: map-get($space, "shooting-star");
-  color: map-get($space, "opaque");
-  border-radius: 50%;
-  width: 1em !important;
-  text-align: center;
-}
+  padding: 0.5rem 1ch;
 
-// make only the close button clickable
-@media (pointer: fine) {
-  .tag {
-    pointer-events: none;
-  }
+  border-radius: 1ch;
 
-  .closeTag {
-    pointer-events: all;
+  transition: 0.2s ease border;
+  border: 2px solid transparent;
+  &:focus {
+    border: 2px solid var(--accent);
+    outline: none;
   }
 }

@@ -1,7 +1,7 @@
 @import "styles/color";
 
 .main {
-  color: map-get($space, "starlight");
+  @extend .accent;
 }
 
 .inner {

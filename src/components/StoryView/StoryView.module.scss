@@ -43,6 +43,6 @@
   @extend .font--body;
   margin: 1em 5ch 0;
   max-width: 80ch;
-  border-top: 2px solid map-get($space, "twilight");
+  border-top: 2px solid var(--color);
   text-align: right;
 }
