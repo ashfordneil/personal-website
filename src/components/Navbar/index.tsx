@@ -8,25 +8,27 @@ import css from "./Navbar.module.scss";
 
 const Navbar: React.FC = () => {
   return (
-    <div className={css.wrapper}>
-      <div className={css.main}>
-        <h1 className={css.name}>
-          <strong className={css.bold}>Neil</strong> Ashford
-        </h1>
-        <div className={css.links}>
-          <Link icon={faGithub} href="https://github.com/ashfordneil">
-            github
-          </Link>
-          <Link icon={faLinkedin} href="https://linkedin.com/in/ashfordneil0">
-            linkedin
-          </Link>
-          <Link icon={faEnvelope} href="mailto:ashfordneil0@gmail.com">
-            mail
-          </Link>
+    <>
+      <div className={css.wrapper}>
+        <div className={css.main}>
+          <h1 className={css.name}>
+            <strong className={css.bold}>Neil</strong> Ashford
+          </h1>
+          <div className={css.links}>
+            <Link icon={faGithub} href="https://github.com/ashfordneil">
+              github
+            </Link>
+            <Link icon={faLinkedin} href="https://linkedin.com/in/ashfordneil0">
+              linkedin
+            </Link>
+            <Link icon={faEnvelope} href="mailto:ashfordneil0@gmail.com">
+              mail
+            </Link>
+          </div>
         </div>
       </div>
       <div className={css.band} />
-    </div>
+    </>
   );
 };
 
