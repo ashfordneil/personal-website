@@ -1,6 +1,6 @@
-import React, { Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouteMatch } from "react-router";
-import { prefetch } from "react-suspense-fetch";
+import { prefetch, refetch } from "react-suspense-fetch";
 
 import ErrorBoundary from "components/ErrorBoundary";
 import ErrorFallback from "components/ErrorFallback";
@@ -8,7 +8,7 @@ import Image from "components/Image";
 import Link from "components/Link";
 import Spinner from "components/Spinner";
 
-import { getStory, Story } from "utility/stories";
+import { getStory as getStoryRaw, Story } from "utility/stories";
 import parse, {
   TreeNode,
   getChildren,
@@ -17,9 +17,14 @@ import parse, {
 
 import css from "./StoryView.module.scss";
 
+const getStory = (story: string | null): Promise<Story> =>
+  story ? getStoryRaw(story) : new Promise(() => {});
+const initialData = prefetch(getStory, null as string | null);
+
 const StoryView: React.FC = () => {
   const story = useStoryName();
-  const data = prefetch(getStory, story);
+  const [data, setData] = useState(initialData);
+  useEffect(() => setData(refetch(data, story as string | null)), [story]);
 
   return (
     <Suspense fallback={<Spinner big />}>
