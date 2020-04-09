@@ -18,6 +18,7 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@types/react-router": "^5.1.4",
     "react": "^0.0.0-experimental-8b155d261",
+    "react-async-hook": "^3.6.1",
     "react-dom": "^0.0.0-experimental-8b155d261",
     "react-router": "^5.1.2",
     "react-suspense-fetch": "^0.2.1",

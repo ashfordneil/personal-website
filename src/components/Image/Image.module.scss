@@ -1,0 +1,46 @@
+@import "styles/fonts";
+
+.caption {
+  @extend .font--body;
+  margin-top: 0.5rem;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+.aspectWrapper {
+  display: grid;
+}
+
+.aspectWrapper > * {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.aspectInner {
+  width: 100%;
+}
+
+.main {
+  width: 100%;
+  transition: 0.2s ease filter;
+  background-size: cover;
+
+  transition: 2s ease-in-out opacity;
+}
+
+.loading {
+  filter: blur(20px) brightness(1);
+}
+
+.error {
+  filter: blur(20px) brightness(0.5);
+}
+
+.show {
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
+}

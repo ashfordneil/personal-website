@@ -4,15 +4,15 @@ import { prefetch } from "react-suspense-fetch";
 
 import ErrorBoundary from "components/ErrorBoundary";
 import ErrorFallback from "components/ErrorFallback";
+import Image from "components/Image";
 import Link from "components/Link";
 import Spinner from "components/Spinner";
-import UnderConstruction from "components/UnderConstruction";
 
 import { getStory, Story } from "utility/stories";
 import parse, {
   TreeNode,
   getChildren,
-  hasDescendentOfType
+  extractDescendentsOfType
 } from "utility/markdown";
 
 import css from "./StoryView.module.scss";
@@ -66,10 +66,11 @@ const StoryBody: React.FC<Story> = props => {
 };
 
 const RenderTree: React.FC<TreeNode> = node => {
-  if (hasDescendentOfType(node, "image")) {
-    return <UnderConstruction ticket={3} />;
-  }
-
+  // Some elements (like paragraph) cannot have img nodes as children in valid
+  // HTML. If we're about to render one of those, extract the images from the
+  // child list first so it can be rendered below.
+  const images =
+    node.type === "paragraph" ? extractDescendentsOfType(node, "image") : [];
   const children = (getChildren(node) || []).map((node, i) => (
     <RenderTree key={i} {...node} />
   ));
@@ -85,7 +86,14 @@ const RenderTree: React.FC<TreeNode> = node => {
     case "list_item":
       return <li className={css.listItem}>{children}</li>;
     case "paragraph":
-      return <p className={css.paragraph}>{children}</p>;
+      return (
+        <>
+          <p className={css.paragraph}>{children}</p>
+          {images.map((node, i) => (
+            <RenderTree key={i} {...node} />
+          ))}
+        </>
+      );
     case "em":
       return <em className={css.em}>{children}</em>;
     case "strong":
@@ -96,6 +104,16 @@ const RenderTree: React.FC<TreeNode> = node => {
       return <>{node.data}</>;
     case "inline":
       return <>{children}</>;
+    case "image":
+      const [alt, ratio, base64] = node.alt.split("|");
+      return (
+        <Image
+          src={node.src}
+          alt={alt}
+          base64={base64}
+          ratio={parseFloat(ratio)}
+        />
+      );
     default:
       return null;
   }
