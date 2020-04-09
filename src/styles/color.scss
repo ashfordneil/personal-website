@@ -4,8 +4,8 @@
 // The "base" colours. These are used for everyday things in the app, like text
 // colours and backgrounds.
 .base {
-  background-color: hsl(0, 0%, 15%);
-  --color: hsl(0, 0%, 85%);
+  background-color: hsl(0, 0%, 22%);
+  --color: hsl(0, 0%, 97%);
   color: var(--color);
 
   @media (prefers-color-scheme: light) {
@@ -18,11 +18,11 @@
 // personal brand (eg the gradient underneath the bar)
 .brand {
   --primary: #{hsl(288, 100%, 70%)};
-  --secondary: hsl(228, 100%, 65%);
+  --secondary: hsl(228, 100%, 70%);
 
   @media (prefers-color-scheme: light) {
-    --primary: hsl(288, 100%, 50%);
-    --secondary: hsl(228, 100%, 60%);
+    --primary: hsl(288, 100%, 64%);
+    --secondary: hsl(228, 100%, 69%);
   }
 }
 
