@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
@@ -26,7 +26,11 @@ const StoryThumbnail: React.FC<StoryMetadata> = props => {
   const length = tags.length;
 
   const [main, setMain] = useState(0);
-  useInterval(() => setMain(main => (main + 1) % length), 1500);
+  const speed = useRef(Math.random());
+  useInterval(
+    () => setMain(main => (main + 1) % length),
+    1000 + 1000 * speed.current
+  );
 
   return (
     <div
