@@ -8,7 +8,7 @@ import {
 export interface StoryMetadata {
   etag: string;
   name: string;
-  updated: Date;
+  created: Date;
   tags: string[];
 }
 
@@ -49,7 +49,7 @@ const extractStoryMetadata = (resource: Resource): StoryMetadata => {
   return {
     etag: resource.etag,
     name,
-    updated: resource.updated,
+    created: resource.timeCreated,
     tags
   };
 };

@@ -47,7 +47,7 @@ const RenderStory: React.FC<RenderProps> = props => {
   return (
     <>
       <h1 className={css.title}>{story.name}</h1>
-      <span className={css.date}>{story.updated.toLocaleDateString()}</span>
+      <span className={css.date}>{story.created.toLocaleDateString()}</span>
       <ErrorBoundary fallback={ErrorFallback}>
         <StoryBody {...story} />
       </ErrorBoundary>

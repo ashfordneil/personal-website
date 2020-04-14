@@ -2,17 +2,6 @@
 @import "styles/fonts";
 
 .main {
-  padding: 0.5rem 2ch 1rem;
-  height: min-content;
-  display: grid;
-  grid-template-areas: "name tag" "date tag";
-  grid-template-columns: 60% 40%;
-  grid-template-rows: 1em 1em;
-  grid-row-gap: 0.6rem;
-  cursor: pointer;
-}
-
-.main {
   @extend .base;
   border-bottom: 2px solid var(--color);
 
@@ -20,66 +9,84 @@
     border-bottom: none;
     padding-bottom: 0.5rem;
   }
+
+  padding: 0.5rem 2ch 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-@media (hover: hover) {
-  .main {
-    border-radius: 0.5rem;
-    border-bottom: none;
-    padding-bottom: 0.5rem;
-  }
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .name {
-  grid-area: name;
   @extend .font--heading;
   padding: 0;
 }
 
 .date {
-  grid-area: date;
   @extend .font--body;
   padding: 0;
   font-style: italic;
   font-size: 0.8em;
 }
 
-.tags {
-  margin: auto 0;
-  grid-area: tag;
-  display: grid;
-  perspective: 15rem;
-}
-
 .tag {
   @extend .font--body;
-  transform: rotateX(var(--angle)) translateZ(1.5em);
-  transition: 0.3s ease transform, 0.3s ease opacity;
-  grid-column: 1;
-  grid-row: 1;
-  backface-visibility: hidden;
 
-  opacity: 0.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  &0 {
-    --angle: 0;
+.tagIcon {
+  @extend .accent;
+  color: var(--accent);
+  font-size: 2rem;
+}
+
+@media (max-width: 119.9ch) {
+  .tags {
+    margin: auto 0;
+    display: grid;
+  }
+
+  .tag {
+    transition: 0.5s ease-in-out transform, 0.5s ease-in-out opacity;
+    opacity: 0;
+    transform-origin: center;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .here {
+    transform: none;
     opacity: 1;
   }
-  &1 {
-    --angle: 45deg;
+
+  .arriving {
+    transform: translateX(-100%) scale(0);
   }
-  &Neg1 {
-    --angle: -45deg;
+
+  .leaving {
+    transform: translateX(100%) scale(0);
   }
-  &2 {
-    --angle: 90deg;
-  }
-  &Neg2 {
-    --angle: -90deg;
+
+  .hidden {
     transition: none;
   }
-  &Hidden {
-    --angle: -180deg;
-    transition: none;
+}
+
+@media (min-width: 120ch) {
+  .tags {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2ch;
+    grid-row-gap: 1em;
   }
 }

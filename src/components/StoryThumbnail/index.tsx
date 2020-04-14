@@ -1,5 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import {
+  faExclamationTriangle,
+  faFingerprint,
+  faGraduationCap,
+  faHandsHelping,
+  faUserTie
+} from "@fortawesome/free-solid-svg-icons";
+import { faReact, faLinux } from "@fortawesome/free-brands-svg-icons";
 
 import useInterval from "utility/interval";
 import { StoryMetadata } from "utility/stories";
@@ -13,25 +23,29 @@ const StoryThumbnail: React.FC<StoryMetadata> = props => {
   while (tags.length < 3) {
     tags.push("");
   }
-  if (tags.length < 5) {
-    tags = [...tags, ...tags];
-  }
   const length = tags.length;
 
   const [main, setMain] = useState(0);
-  useInterval(() => setMain(main => (main + 1) % length), 1500);
+  const speed = useRef(Math.random());
+  useInterval(
+    () => setMain(main => (main + 1) % length),
+    1000 + 1000 * speed.current
+  );
 
   return (
     <div
       className={css.main}
       onClick={() => history.push(`/story/${props.name}`)}
     >
-      <h3 className={css.name}>{props.name}</h3>
-      <div className={css.date}>{props.updated.toLocaleDateString()}</div>
+      <div className={css.info}>
+        <h3 className={css.name}>{props.name}</h3>
+        <div className={css.date}>{props.created.toLocaleDateString()}</div>
+      </div>
       <div className={css.tags}>
         {tags.map((tag, i) => (
           <div key={i} className={`${css.tag} ${getClass(i, main, length)}`}>
-            {tag}
+            <FontAwesomeIcon className={css.tagIcon} icon={getIcon(tag)} />
+            <span>{tag}</span>
           </div>
         ))}
       </div>
@@ -41,26 +55,37 @@ const StoryThumbnail: React.FC<StoryMetadata> = props => {
 
 const getClass = (i: number, main: number, length: number) => {
   if (i === main) {
-    return css.tag0;
+    return css.here;
   }
 
   if ((i + 1) % length === main) {
-    return css.tag1;
+    return css.leaving;
   }
 
   if (i === (main + 1) % length) {
-    return css.tagNeg1;
+    return css.arriving;
   }
 
-  if ((i + 2) % length === main) {
-    return css.tag2;
-  }
+  return css.hidden;
+};
 
-  if (i === (main + 2) % length) {
-    return css.tagNeg2;
+const getIcon = (tag: string): IconDefinition => {
+  switch (tag) {
+    case "About Me":
+      return faFingerprint;
+    case "Community":
+      return faHandsHelping;
+    case "Linux":
+      return faLinux;
+    case "React":
+      return faReact;
+    case "Professional":
+      return faUserTie;
+    case "University":
+      return faGraduationCap;
+    default:
+      return faExclamationTriangle;
   }
-
-  return css.tagHidden;
 };
 
 export default StoryThumbnail;
