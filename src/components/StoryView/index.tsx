@@ -24,7 +24,9 @@ const initialData = prefetch(getStory, null as string | null);
 const StoryView: React.FC = () => {
   const story = useStoryName();
   const [data, setData] = useState(initialData);
-  useEffect(() => setData(refetch(data, story as string | null)), [story]);
+  useEffect(() => setData(data => refetch(data, story as string | null)), [
+    story
+  ]);
 
   return (
     <Suspense fallback={<Spinner big />}>
